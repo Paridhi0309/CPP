@@ -1,47 +1,28 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
-int BinarySearch(int arr[], int n, int val){
-    int start=0,end=n-1;
-    while(start<=end)
+int BinarySearch(int arr[],int l,int e,int x)
+{
+    int mid=(l+e)/2;
+    while(l<=e)
     {
-        int mid=(start+end)/2;
-        if(arr[mid]>val)
-        {
-             end=mid-1;
-        }
-        else if(arr[mid]<val)
-        {
-            start=mid+1;
-        }
-        else
+        if(arr[mid]==x)
         {
             return mid;
         }
+        else if(arr[mid]<x)
+        {
+            return BinarySearch(arr,mid+1,e,x);
+        }
+        else{
+            return BinarySearch(arr,l,mid-1,x);
+        }
     }
- return -1;
 }
 int main()
 {
-
-	int size;
-	cin >> size;
-	int *input = new int[size];
-
-	for(int i = 0; i < size; ++i)
-	{
-		cin >> input[i];
-	}
-
-	int t;
-	cin >> t;
-
-	while (t--)
-	{
-		int val;
-		cin >> val;
-		cout << BinarySearch(input, size, val) << endl;
-	}
-
-	delete [] input;
-	return 0;
+    int arr[]={2,7,89,91,100};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int x;
+    cin>>x;
+    cout<<BinarySearch(arr,0,n,x);
 }
